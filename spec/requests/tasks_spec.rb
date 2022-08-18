@@ -2,7 +2,7 @@ require 'rails_helper'
 
 
 describe 'GET /tasks' do
-  it '全てのタスクを取得' do
+  it '全てのタスクを取得する' do
     FactoryBot.create_list(:task, 10)
 
     get '/tasks'
