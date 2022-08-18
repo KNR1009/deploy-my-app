@@ -11,6 +11,7 @@ class TasksController < ApplicationController
     if task.save
       head :no_content
     else 
+      errors = @task.errors.full_messages.map { |message| { message: message } }
       render json: errors, status: :bad_request
     end
   end
