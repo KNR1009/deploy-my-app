@@ -19,4 +19,6 @@ jobs:
         run: |
           bundle install
 
+      - run: bundle exec rails db:create
+      - run: bundle exec rails db:migrate
       - run: bundle exec rspec spec/requests/tasks_spec.rb
