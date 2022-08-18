@@ -50,3 +50,12 @@ describe "PUT /tasks/:id" do
   end
 end
 
+describe 'Delete /tasks/:id' do
+  it 'taskを削除する' do
+    task = create(:task)
+    #データが削除されている事を確認
+    expect { delete "/tasks/#{task.id}" }.to change(Task, :count).by(-1)
+    # リクエスト成功を表す200が返ってきたか確認する。
+    expect(response.status).to eq(200)
+  end
+end
