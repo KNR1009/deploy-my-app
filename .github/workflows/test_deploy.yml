@@ -7,16 +7,8 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-    # Service containers to run with `container-job`
-    services:
-      postgres:
-        image: postgres
-        ports: ["5432:5432"]
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
     steps:
       - uses: actions/checkout@v2
-
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6.6
@@ -24,7 +16,7 @@ jobs:
       - name: Run bundle install
         run: |
           bundle install
-
-      # - run: bundle exec rails db:create
-      # - run: bundle exec rails db:migrate
-      - run: bundle exec rspec spec/requests/tasks_spec.rb
+      - name: Set up database schema
+        run: bundle exec rails db:create
+      - name: rspec test
+        run: bundle exec rspec spec/requests/tasks_spec.rb
